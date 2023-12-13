@@ -1,4 +1,14 @@
-### Pyblish Lite
+# Pyblish Lite
+
+<img src="https://pyblish.readthedocs.io/en/latest/_images/logo_small.png" alt="Pyblish Logo" width="100">
+
+A customized fork of [Pyblish Lite](https://github.com/pyblish/pyblish-lite).
+
+`pyblish_lite` is a fork of the [ynput/pyblish-lite](https://github.com/ynput/pyblish-lite) repository, 
+a community-driven alternative to pyblish-qml.
+
+**Note:** This document reflects the state of `pyblish_lite` as of ynput's fork creation. Some elements from the 
+original Pyblish Lite, such as GIFs, may be outdated.
 
 [![Build Status](https://travis-ci.org/pyblish/pyblish-lite.svg?branch=master)](https://travis-ci.org/pyblish/pyblish-lite) [![Coverage Status](https://coveralls.io/repos/github/pyblish/pyblish-lite/badge.svg?branch=master)](https://coveralls.io/github/pyblish/pyblish-lite?branch=master)
 
@@ -55,6 +65,7 @@ $ python -m pyblish_lite
 
 ```python
 import pyblish_lite
+
 pyblish_lite.show()
 ```
 

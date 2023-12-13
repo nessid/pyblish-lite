@@ -23,13 +23,13 @@ classifiers = [
 
 
 setup(
-    name="pyblish-lite",
+    name="pyblish_lite",
     version=version,
     description="Lightweight graphical user interface to Pyblish",
-    long_description="See https://github.com/pyblish/pyblish-lite",
+    long_description="See https://github.com/pyblish/pyblish_lite",
     author="Abstract Factory and Contributors",
     author_email="marcus@abstractfactory.com",
-    url="https://github.com/pyblish/pyblish-lite",
+    url="https://github.com/nessid/pyblish_lite",
     license="LGPL",
     packages=find_packages(),
     zip_safe=False,
