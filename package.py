@@ -1,19 +1,25 @@
-name = 'pyblish_lite'
+name = "pyblish_lite"
 
-version = '1.1.0'
+version = "0.0.0"
 
-description = 'The pyblish-lite repository with nessid custom code. Started from openpipe archived pyblish-lite repo ' \
-              'https://github.com/ynput/pyblish-lite'
 
-authors = ['vbeges', 'esoulacroup', 'nessid']
+description = "Pyblish"
 
-requires = [
-            'pyblish_base',
-            'pyblish_core',
-            ]
+authors = ["nessid", "vbeges", "esoulacroup"]
+
+requires = []
+
+cachable = False
 
 
 def commands():
-    env.PYTHONPATH.append('{root}/python')
+    env.PYTHONPATH.append("{root}")
+    env.PYBLISH_PLUGINS_FOLDERS.append('{root}/pyblish_plugins/pyblish_plugins_common/plugins')
+    env.PYBLISH_PLUGINS_FOLDERS.append('{root}/pyblish_plugins/pyblish_plugins_maya/plugins')
+    # Path to the JSON file listing pyblish plugins active states by asset_types and tasks.
+    env.PYBLISH_PLUGINS_SETTINGS_BY_TASKS_JSON = "{env.CONFIG_ROOT}/pyblish/pyblish_plugins_settings_by_tasks.json"
+    # Path to the JSON file listing production assets types and their associated tasks
+    env.PYBLISH_ASSET_TASKS_MAPPING_JSON = "{env.CONFIG_ROOT}/pyblish/asset_tasks_mapping.json"
+    env.MAYA_SCRIPT_PATH.append('{root}/pyblish_maya/pythonpath')
+    env.MAYA_SCRIPT_PATH.append('{root}/pyblish_lite/pythonpath')
     env.PYBLISH_GUI = "pyblish_lite"
-    env.MAYA_SCRIPT_PATH.append('{root}/python/pyblish_lite/pythonpath')
