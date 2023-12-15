@@ -1,8 +1,13 @@
 import os
 import json
+import logging
 from typing import List, Type
 import pyblish.api
 from pyblish_core.plugins_data_generator import PluginsDataGenerator
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+log = logging.getLogger(__name__)
 
 
 class PluginsCollect(object):
@@ -28,18 +33,23 @@ class PluginsCollect(object):
         :param asset_type: (str) The asset type for which plugins are being collected.
         :param task: (str) The specific task for which plugins are being collected.
         :return: (PluginsCollect) An instance of PluginsCollect containing relevant plugins.
-        :raises: OSError: If the JSON configuration files are not found.
         """
         # Retrieve paths for JSON configuration files from environment variables.
         plugins_activation_env_var = 'PYBLISH_PLUGINS_SETTINGS_BY_TASKS_JSON'
         pyblish_plugins_settings_by_task = os.getenv(plugins_activation_env_var)
 
         if not pyblish_plugins_settings_by_task:
-            raise EnvironmentError(f"Environment variable '{plugins_activation_env_var}' is not set.")
+            log.warning(f"Environment variable '{plugins_activation_env_var}' is not set.")
+            # Create an empty JSON file
+            with open(pyblish_plugins_settings_by_task, 'w') as file:
+                json.dump({}, file)
 
-        # Validate the existence of JSON files.
+        # Load or create the JSON file
         if not os.path.exists(pyblish_plugins_settings_by_task):
-            raise OSError(f"File not found: {pyblish_plugins_settings_by_task}")
+            log.warning(f"File not found: {pyblish_plugins_settings_by_task}")
+            # Create an empty JSON file
+            with open(pyblish_plugins_settings_by_task, 'w') as file:
+                json.dump({}, file)
 
         with open(pyblish_plugins_settings_by_task, 'r') as file:
             asset_task_plugins_settings = json.load(file).get(asset_type, {}).get(task, {})
