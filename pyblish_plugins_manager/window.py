@@ -309,8 +309,8 @@ class PluginsManagerUI(QtWidgets.QDialog):
         """
         module_path = plugin_data["module_path"]
         module_path_parts = module_path.split('.')
-        plugin_package = module_path_parts[0]
-        plugin_type = module_path_parts[2]
+        plugin_package = module_path_parts[-4]
+        plugin_type = module_path_parts[-2]
         plugin_category = plugin_data["plugin_category"]
         mandatory = plugin_data.get("mandatory", False)  # Get the mandatory flag, default to False if not present
 
