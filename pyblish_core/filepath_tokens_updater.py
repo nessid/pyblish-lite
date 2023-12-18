@@ -78,7 +78,7 @@ class FilepathTokensUpdater:
     #
     #     return tokens
 
-    def register_plugins_by_task(self):
+    def register_plugins_by_task(self, asset_type=None, task=None):
         """
         Registers Pyblish plugins based on the current asset type and task.
         """
@@ -89,16 +89,16 @@ class FilepathTokensUpdater:
 
         # Retrieve current tokens
         # tokens = self._get_current_tokens()
-        tokens = {
-            'asset_type': 'Set',
-            'task': 'model_all',
-                  }
+        # tokens = {
+        #     'asset_type': 'Set',
+        #     'task': 'model_all',
+        #           }
 
         # Check if tokens are retrieved
-        if tokens:
+        if asset_type and task:
             # Extract asset type and task from tokens
-            asset_type = tokens['asset_type']
-            task = tokens['task']
+            # asset_type = tokens['asset_type']
+            # task = tokens['task']
 
             # Create a collection of plugins specific to the current asset type and task
             collection = plugins_collection.PluginsCollect.from_asset_task(asset_type, task)
