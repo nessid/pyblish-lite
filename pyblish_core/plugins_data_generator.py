@@ -64,7 +64,6 @@ class PluginsDataGenerator:
         """Extract Pyblish plugin data from a module filepath."""
         module = importlib.import_module(module_path)
 
-
         module_plugins = []
         for name in dir(module):
             obj = getattr(module, name)
