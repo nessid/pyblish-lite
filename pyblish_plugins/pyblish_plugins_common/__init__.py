@@ -1,0 +1,3 @@
+from pyblish_core.env_lib import setup_plugins_folders_env_variable
+
+setup_plugins_folders_env_variable(__file__)
