@@ -56,8 +56,6 @@ pyblish_base_path = '/path/to/pyblish_base'
 sys.path.append(pyblish_lite_path)
 sys.path.extend([
     pyblish_maya_path,
-    os.path.join(pyblish_maya_path, 'pyblish_maya'),
-    os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath'),
     pyblish_base_path
 ])
 
