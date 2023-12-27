@@ -1,273 +1,81 @@
 # Pyblish Lite
 
-<img src="https://pyblish.readthedocs.io/en/latest/_images/logo_small.png" alt="Pyblish Logo" width="100">
+## About This Package
 
-A customized fork of [Pyblish Lite](https://github.com/pyblish/pyblish-lite).
+This package is a fork of the [ynput/pyblish-lite](https://github.com/ynput/pyblish-lite) repository, offering a community-driven alternative to pyblish-qml. It's tailored to provide a comprehensive solution for creative workflows in digital content creation tools like Autodesk Maya.
 
-`pyblish_lite` is a fork of the [ynput/pyblish-lite](https://github.com/ynput/pyblish-lite) repository, 
-a community-driven alternative to pyblish-qml.
+### Key Components and Documentation
 
-**Note:** This document reflects the state of `pyblish_lite` as of ynput's fork creation. Some elements from the 
-original Pyblish Lite, such as GIFs, may be outdated.
+- [**Pyblish Lite (`pyblish_lite`)**](./pyblish_lite/package_data/README.md): Contains `pyblish_lite`, a streamlined and optimized version of Pyblish for enhanced performance and usability.
+- [**Custom Plugins (`pyblish_plugins`)**](./pyblish_plugins/package_data/README.md): Includes a set of custom plugins designed for specific publishing requirements in creative projects.
+- [**Plugins Manager (`pyblish_plugins_manager`)**](./pyblish_plugins_manager/package_data/README.md): Features the `pyblish_plugins_manager` for easy management and integration of plugins.
+- [**Pyblish Core (`pyblish_core`)**](./pyblish_core/package_data/README.md): Comprises custom tools and utilities supporting the functionality of plugins and the plugins manager.
 
-[![Build Status](https://travis-ci.org/pyblish/pyblish-lite.svg?branch=master)](https://travis-ci.org/pyblish/pyblish-lite) [![Coverage Status](https://coveralls.io/repos/github/pyblish/pyblish-lite/badge.svg?branch=master)](https://coveralls.io/github/pyblish/pyblish-lite?branch=master)
+Each linked package name leads to a README file with detailed information about specific functionalities, usage instructions, and additional details.
 
-A lightweight alternative to [pyblish-qml](https://github.com/pyblish/pyblish-qml).
+### Pyblish Core Functionality
 
-![untitled](https://cloud.githubusercontent.com/assets/2152766/15649651/0785cdc2-266b-11e6-81aa-182e55234854.gif)
+`pyblish_core` plays a vital role in Pyblish Lite's operation. It handles several key functionalities:
 
-**Supports**
+- **Configuration of Logging**: Set up logging for Pyblish Lite to capture and manage log messages.
+- **Filepath Tokens Updater**: Initializes `FilepathTokensUpdater` for managing file path tokens, crucial for working with assets and tasks.
+- **Dynamic Plugin Registration**: Listens for `pyblish_lite_reset` events, and based on the environment variables `PYBLISH_LITE_ASSET_TYPE` and `PYBLISH_LITE_TASK`, it registers plugins relevant to the current context.
 
-Python 2.6+ and Python 3.x
+### Purpose of the Fork
 
-- PySide
-- PySide2
-- PyQt4
-- PyQt5
+The aim of this fork is to provide a robust and flexible publishing framework that is both lightweight and feature-rich. It is designed to address the specific needs of the community and to offer an efficient and customizable publishing solution for various creative production settings.
 
-<br>
-<br>
-<br>
+## Setting Up Pyblish Lite for Maya
 
-### Installation
+The `userSetup.py` file is an essential part of customizing your Maya environment. This script is executed when Maya starts, and it can run any Python commands that do not depend on Maya's functionality. It's particularly useful for setting up plugins, importing libraries, and modifying the system path.
 
-You can install via pip, or clone manually.
+### Creating and Locating `userSetup.py`
 
-```bash
-$ pip install pyblish-lite
-$ python -m pyblish_lite --debug  # Test install
-```
+1. **Create the `userSetup.py` File**: If it doesn't already exist, you need to create the `userSetup.py` file. This file will contain the commands you want Maya to execute at startup.
 
-Requires [pyblish-base](https://github.com/pyblish/pyblish-base).
+2. **File Location**:
+   - On Linux and macOS, place the file in `$MAYA_APP_DIR/<version>/scripts`.
+   - On Windows, place it in `%MAYA_APP_DIR%/<version>/scripts`.
+   
+   To find the value of `MAYA_APP_DIR`, run `getenv("MAYA_APP_DIR")` from the Maya Script Editor.
 
-<br>
-<br>
-<br>
+### Configuring `userSetup.py` for Pyblish Lite
 
-### Usage
-
-Pyblish Lite runs both standalone and from a host and requires either PySide of PyQt bindings to be readily available.
-
-- [Terminal](#terminal)
-- [Python](#python)
-- [Maya](#maya)
-- [Nuke](#nuke)
-- [Mari](#mari)
-- [Houdini](#houdini)
-
-##### Terminal
-
-```bash
-$ python -m pyblish_lite
-```
-
-##### Python
+Add the following script to your `userSetup.py` to set up Pyblish Lite. This script will ensure that the necessary paths are added to the system path and that the Pyblish modules are loaded correctly:
 
 ```python
-import pyblish_lite
+import os
+import sys
 
-pyblish_lite.show()
+# Paths for Pyblish Lite and dependencies
+pyblish_lite_path = '/path/to/pyblish_lite'
+pyblish_maya_path = '/path/to/pyblish_maya'
+pyblish_base_path = '/path/to/pyblish_base'
+
+# Adding paths to system path
+sys.path.append(pyblish_lite_path)
+sys.path.extend([
+    pyblish_maya_path,
+    os.path.join(pyblish_maya_path, 'pyblish_maya'),
+    os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath'),
+    pyblish_base_path
+])
+
+# Import and setup Pyblish modules
+try:
+    import pyblish_lite
+    import pyblish_core
+    import pyblish_plugins_manager
+    import pyblish
+    import pyblish_maya
+    pyblish_maya.setup()
+except ImportError as e:
+    import traceback
+    print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
 ```
 
-##### Maya
+Replace `'/path/to/...'` with the actual paths where your Pyblish Lite and its dependencies are located.
 
-```python
-import pyblish.api
-import pyblish_lite
+For more detailed information on using the `userSetup.py` file in Maya, you can refer to Autodesk's guides on [Initializing the Maya Python environment](https://help.autodesk.com/cloudhelp/2022/ENU/Maya-Scripting/files/GUID-640C1383-3FB8-410F-AE18-987A812B5914.htm) and [Entering Python commands in Maya](https://download.autodesk.com/us/maya/Maya_2014_GettingStarted/files/Using_Python_in_Maya_Entering_Python_commands.htm).
 
-pyblish.api.register_host("maya")
-
-window = pyblish_lite.show()
-```
-
-##### Nuke
-
-```python
-import pyblish.api
-import pyblish_lite
-
-pyblish.api.register_host("nuke")
-
-window = pyblish_lite.show()
-```
-
-##### Mari
-
-```python
-from PySide import QtGui
-
-import mari
-import pyblish.api
-import pyblish_lite
-
-pyblish.api.register_host("mari")
-
-mari.app.activateMainWindow()
-parent = QtGui.qApp.activeWindow()
-
-window = pyblish_lite.show(parent)
-```
-
-##### Houdini
-
-ATTENTION: This can't be run from the Houdini Python terminal, it'll crash the process.
-
-```python
-import pyblish.api
-import pyblish_lite
-
-pyblish.api.register_host("houdini")
-
-window = pyblish_lite.show()
-```
-
-<br>
-<br>
-<br>
-
-### Documentation
-
-Below is the current and full documentation of Lite.
-
-Currently, it has all things Pyblish QML except the perspective view, plus a few extras.
-
-- [Keyboard shortcuts](#keyboard-shortcuts)
-- [Artist view](#artist-view)
-- [Middle-click on any item to explore it's properties](#middle-click)
-- [Comment section](#comment)
-- Scrollbars
-- Select multiple items
-- Remembers checked state between refreshes
-- Continue publishing after successful validation
-- [Settings](#settings)
-
-##### Keyboard shortcuts
-
-- Select a single item to toggle
-- **Drag**, **CTRL** or **SHIFT** select to select multiple items
-- Invert check with **Space**
-- Toggle ON with **Enter**
-- Toggle OFF with **Backspace**
-- **CTRL+A** to select all
-
-<br>
-
-##### Artist view
-
-Launching Lite brings you to the landing page, called "Artist View".
-
-![](http://forums.pyblish.com/uploads/default/original/1X/92c8f51dfe3da624a249f55e88f95b6a7d83193a.gif)
-
-It's designed to provide a minimal set of information relevant to any user, without going into detail. Here you can control the icon with which an instance is drawn via the `icon` data member.
-
-```python
-instance.data["icon"] = "random"
-```
-
-Icons are derived from a font library known as FontAwesome. Their names and appearance can be found here:
-
-- [fontawesome.io/icons/](http://fontawesome.io/icons/)
-
-As a future suggestion, maybe we'd also like to visualise some form of `description` or `message` here as well?
-
-<br>
-
-##### Overview
-
-The next tab brings you to the full overview of available instances and the plug-ins associated with those instances. Here the user may toggle instances, like before, but also plug-ins tagged as `optional=True`.
-
-In Lite's bigger brother QML, plug-ins that are not compatible with any instance are excluded from this list, simplifying situations where you may have hundreds of them, but only a few are relevant. This is an upcoming feature in Lite.
-
-<br>
-
-##### Terminal
-
-Finally, the last tab provides a full record of everything logged from within a plug-in, along with exceptions raised (for the artist) and their exact location in Python (for the developer).
-
-QML also features filtering of these messages, via log `level` and freeform text search.
-
-<br>
-
-##### Middle Click
-
-In Pyblish QML, items in the terminal are expanded to reveal more information about any particular message, like at which module and line within that module it came from. This information is available via middle-click.
-
-![middle](https://cloud.githubusercontent.com/assets/2152766/16478617/906b599c-3e92-11e6-9bd3-93447740503c.gif)
-
-##### Comment
-
-Add `context.data["comment"] = ""` and the GUI adds a widget to interactively modify that data member.
-
-![comment](https://cloud.githubusercontent.com/assets/2152766/16478620/93c7190a-3e92-11e6-8eb0-32606ff91eb9.gif)
-
-Pre-fill it for a custom placeholder or guidelines for how to comment. Press "Enter" to publish.
-
-<br>
-
-##### Settings
-
-You can customise the user's experience with ```pyblish-lite``` from the settings module.
-
-```python
-import pyblish_lite.settings
-
-# Customize the title of the window Pyblish-lite produces.
-# Default: "Pyblish"
-pyblish_lite.settings.WindowTitle = "My Window"
-
-# Customize which tab to show initially from the existing tabs available;
-# "artist", "overview" and "terminal".
-# Default: "artist"
-pyblish_lite.settings.InitialTab = "overview"
-
-# Customize whether to use labels for plugins and instances.
-# Default: True
-pyblish_lite.settings.UseLabel = False
-
-# Custommize the width and height of the window
-pyblish_lite.settings.WindowSize = (500, 500)
-```
-
-<br>
-<br>
-<br>
-
-### Testing
-
-Tests are automatically run at each commit to GitHub via Travis-CI. You can run these tests locally either by (1) having the dependencies available on your PYTHONPATH, or (2) via Docker.
-
-**Option 1**
-
-```bash
-$ cd pyblish-lite
-$ export PYTHONPATH=/path/to/Qt.py:/path/to/pyside:/path/to/pyblish-base
-$ nosetests --verbose --with-doctext --exclude=vendor
-```
-
-**Option 2**
-
-```bash
-$ cd pyblish-lite
-$ docker build -t pyblish/pyblish-lite .
-$ docker run --rm -v $(pwd):/pyblish-lite pyblish/pyblish-lite
-```
-
-**Example output**
-
-```bash
-# Doctest: pyblish_lite.model.ProxyModel ... ok
-# Doctest: pyblish_lite.util.get_asset ... ok
-# Anything runs ... ok
-# Logging things that aren't string is fine ... ok
-# Resetting works the way you'd expect ... ok
-# Publishing works the way you'd expect ... ok
-# Only supported families are published ... ok
-# Only active plugins are published ... ok
-# Only active instances are published ... ok
-# Logging things that aren't string is fine ... ok
-#
-# ----------------------------------------------------------------------
-# Ran 10 tests in 0.357s
-#
-# OK
-```
+For more general details on using external Python libraries with Maya, see Autodesk's official guide: [Using external Python libraries with Maya Python](https://help.autodesk.com/view/MAYAUL/).

@@ -11,3 +11,7 @@ __all__ = [
     'version_info',
     '__version__'
 ]
+
+from .setup_env import setup_env_variables
+
+setup_env_variables()

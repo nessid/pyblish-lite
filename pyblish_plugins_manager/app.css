@@ -1,0 +1,181 @@
+
+/* Global CSS */
+* {
+    border: none;
+    font-size: 11px; /* Font size */
+    /* background: #293840; */
+}
+
+/* Dialog Styles */
+QDialog {
+    background-color: #32434d;
+}
+
+QLabel {
+
+}
+
+QToolTip {
+    background-color: black;
+    color: white; /* Text color */
+    padding: 5px; /* Padding inside the tooltip */
+    opacity: 125; /* Transparency, 255 is fully opaque */
+    font-size: 10px; /* Font size */
+    font-weight: bold; /* Font weight */
+    font-family: Open Sans; /* Font family */
+    text-align: center; /* Text alignment */
+}
+
+/* Button Styles */
+QPushButton {
+    background-color: #425e66;
+    color: #c3d4d9;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+QPushButton:hover {
+    background-color: #4b6a73;
+}
+
+QPushButton:pressed {
+    background-color: #2f3c40;
+}
+
+/* Special Overrides or Exceptions */
+QPushButton#saveButton {
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold; /* Font weight */
+    margin: 4px 2px;
+}
+
+QPushButton:hover#saveButton {
+}
+
+QPushButton:pressed#saveButton {
+}
+
+QCheckBox {
+    /* spacing: 5px; /* Space between checkbox and label */
+}
+QCheckBox::indicator {
+    width: 12px; /* Width of checkbox */
+    height: 12px; /* Height of checkbox */
+}
+QCheckBox::indicator:checked {
+    /*image: url("icons/check_mark.png"); /* Checked state image */
+}
+QCheckBox::indicator:unchecked {
+    border-color:transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    background-color: #212526;
+}
+
+QComboBox {
+    border-radius: 3px; /* Rounded corners */
+    padding: 2px 5px; /* Padding */
+    background-color: #212526;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #2f3c40;
+}
+
+QComboBox::drop-down {
+    width: 15px; /* Width of the dropdown button */
+}
+
+QComboBox::down-arrow {
+    /* image: url("path/to/arrow.png"); /* Replace with your arrow icon */
+}
+
+QGroupBox {
+    margin-top: 1ex; /* Space at the top */
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center; /* Position of the title */
+}
+
+QTreeWidget {
+    background-color: #1c2226; /* dark theme color */
+    show-decoration-selected: 0; /* Highlighting selected items */
+    /* alternate-background-color: black; /* Color for alternate rows */
+}
+QTreeWidget::item {
+    height: 20px;
+}
+
+QTreeWidget::item:selected {
+    background-color: black; /* Background color for selected items */
+    opacity: 50;
+}
+QHeaderView::section {
+    background-color: #293840; /* Column background color */
+    padding-left: 4px; /* Padding inside the header section */
+}
+
+QTabBar {
+    /* background: #f0f0f0; */
+}
+
+QTabBar::tab {
+    /* background: #c0c0c0; */
+    background: #2f3c40;
+}
+
+QTabBar::tab:selected {
+    /* background: #a0a0a0; */
+    /* Additional styling for the selected tab */
+}
+
+QTabBar::tab:hover {
+    /* background: #d0d0d0; */
+    /* Additional styling for hovered tabs */
+}
+
+QTabWidget::pane {
+    border-top: none;
+}
+
+QTabWidget::pane:selected {
+    border-top: none;
+    background: #42565c;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: transparent;
+    width: 6px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #425e66; /* Default handle color */
+    border-radius: 3px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #4b6a73;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    border: 1px solid #444;
+    width: 3px;
+    height: 3px;
+    background: white;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
