@@ -6,10 +6,10 @@ This package is a fork of the [ynput/pyblish-lite](https://github.com/ynput/pybl
 
 ### Key Components and Documentation
 
-- [**Pyblish Lite (`pyblish_lite`)**](./pyblish_lite/package_data/readme.md): Contains `pyblish_lite`, a streamlined and optimized version of Pyblish for enhanced performance and usability.
-- [**Custom Plugins (`pyblish_plugins`)**](./pyblish_plugins/package_data/readme.md): Includes a set of custom plugins designed for specific publishing requirements in creative projects.
-- [**Plugins Manager (`pyblish_plugins_manager`)**](./pyblish_plugins_manager/package_data/readme.md): Features the `pyblish_plugins_manager` for easy management and integration of plugins.
-- [**Pyblish Core (`pyblish_core`)**](./pyblish_core/package_data/readme.md): Comprises custom tools and utilities supporting the functionality of plugins and the plugins manager.
+- [**Pyblish Lite (`pyblish_lite`)**](./pyblish_lite/package_data/README.md): Contains `pyblish_lite`, a streamlined and optimized version of Pyblish for enhanced performance and usability.
+- [**Custom Plugins (`pyblish_plugins`)**](./pyblish_plugins/package_data/README.md): Includes a set of custom plugins designed for specific publishing requirements in creative projects.
+- [**Plugins Manager (`pyblish_plugins_manager`)**](./pyblish_plugins_manager/package_data/README.md): Features the `pyblish_plugins_manager` for easy management and integration of plugins.
+- [**Pyblish Core (`pyblish_core`)**](./pyblish_core/package_data/README.md): Comprises custom tools and utilities supporting the functionality of plugins and the plugins manager.
 
 Each linked package name leads to a README file with detailed information about specific functionalities, usage instructions, and additional details.
 
