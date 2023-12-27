@@ -61,8 +61,7 @@ sys.path.extend([
     pyblish_maya_path
 ])
 
-# Attempt to import Pyblish modules
-# This is where the actual Pyblish functionality is imported into the script
+# Attempt to import Pyblish Lite and chosen plugins
 try:
     import pyblish_lite
     import pyblish_plugins.pyblish_plugins_common
