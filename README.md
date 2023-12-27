@@ -1,43 +1,73 @@
 # Pyblish Lite
 
-[Using external Python libraries with Maya Python](https://help.autodesk.com/view/MAYAUL/2022/ENU/?guid=GUID-C24973A1-F6BF-4614-BC3A-9F1A51D78F4C)
+## About This Package
 
-userSetup content:
-```
+This package is a fork of the [ynput/pyblish-lite](https://github.com/ynput/pyblish-lite) repository, offering a community-driven alternative to pyblish-qml. It's tailored to provide a comprehensive solution for creative workflows in digital content creation tools like Autodesk Maya.
+
+### Key Components and Documentation
+
+- [**Pyblish Lite (`pyblish_lite`)**](./pyblish_lite/package_data/readme.md): Contains `pyblish_lite`, a streamlined and optimized version of Pyblish for enhanced performance and usability.
+- [**Custom Plugins (`pyblish_plugins`)**](./pyblish_plugins/package_data/readme.md): Includes a set of custom plugins designed for specific publishing requirements in creative projects.
+- [**Plugins Manager (`pyblish_plugins_manager`)**](./pyblish_plugins_manager/package_data/readme.md): Features the `pyblish_plugins_manager` for easy management and integration of plugins.
+- [**Pyblish Core (`pyblish_core`)**](./pyblish_core/package_data/readme.md): Comprises custom tools and utilities supporting the functionality of plugins and the plugins manager.
+
+Each linked package name leads to a README file with detailed information about specific functionalities, usage instructions, and additional details.
+
+### Purpose of the Fork
+
+The aim of this fork is to provide a robust and flexible publishing framework that is both lightweight and feature-rich. It is designed to address the specific needs of the community and to offer an efficient and customizable publishing solution for various creative production settings.
+
+## Setting Up Pyblish Lite for Maya
+
+The `userSetup.py` file is an essential part of customizing your Maya environment. This script is executed when Maya starts, and it can run any Python commands that do not depend on Maya's functionality. It's particularly useful for setting up plugins, importing libraries, and modifying the system path.
+
+### Creating and Locating `userSetup.py`
+
+1. **Create the `userSetup.py` File**: If it doesn't already exist, you need to create the `userSetup.py` file. This file will contain the commands you want Maya to execute at startup.
+
+2. **File Location**:
+   - On Linux and macOS, place the file in `$MAYA_APP_DIR/<version>/scripts`.
+   - On Windows, place it in `%MAYA_APP_DIR%/<version>/scripts`.
+   
+   To find the value of `MAYA_APP_DIR`, run `getenv("MAYA_APP_DIR")` from the Maya Script Editor.
+
+### Configuring `userSetup.py` for Pyblish Lite
+
+Add the following script to your `userSetup.py` to set up Pyblish Lite. This script will ensure that the necessary paths are added to the system path and that the Pyblish modules are loaded correctly:
+
+```python
 import os
 import sys
 
+# Paths for Pyblish Lite and dependencies
+pyblish_lite_path = '/path/to/pyblish_lite'
+pyblish_maya_path = '/path/to/pyblish_maya'
+pyblish_base_path = '/path/to/pyblish_base'
 
-sys.path.append('/home/nadia.essid/data/packages/nessid/pyblish_lite')  # Path to pyblish_lite
+# Adding paths to system path
+sys.path.append(pyblish_lite_path)
+sys.path.extend([
+    pyblish_maya_path,
+    os.path.join(pyblish_maya_path, 'pyblish_maya'),
+    os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath'),
+    pyblish_base_path
+])
 
-
-pyblish_maya_path = '/z/apps/tools/external/pyblish_maya/2.1.10/python'
-sys.path.append(pyblish_maya_path)
-sys.path.append(os.path.join(pyblish_maya_path, 'pyblish_maya'))
-sys.path.append(os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath'))
-
-
-pyblish_base_path = '/z/apps/tools/external/pyblish_base/1.8.11/python'
-sys.path.append(pyblish_base_path)
-
-import pyblish_lite
-import pyblish_core
-import pyblish_plugins_manager
-import pyblish
-
-
-
+# Import and setup Pyblish modules
 try:
-    __import__("pyblish.api")
-    __import__("pyblish_maya")
-
+    import pyblish_lite
+    import pyblish_core
+    import pyblish_plugins_manager
+    import pyblish
+    import pyblish_maya
+    pyblish_maya.setup()
 except ImportError as e:
     import traceback
-
-    print("pyblish-maya: Could not load integration: %s"
-          % traceback.format_exc())
-else:
-    import pyblish_maya
-
-    pyblish_maya.setup()
+    print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
 ```
+
+Replace `'/path/to/...'` with the actual paths where your Pyblish Lite and its dependencies are located.
+
+For more detailed information on using the `userSetup.py` file in Maya, you can refer to Autodesk's guides on [Initializing the Maya Python environment](https://help.autodesk.com/cloudhelp/2022/ENU/Maya-Scripting/files/GUID-640C1383-3FB8-410F-AE18-987A812B5914.htm) and [Entering Python commands in Maya](https://download.autodesk.com/us/maya/Maya_2014_GettingStarted/files/Using_Python_in_Maya_Entering_Python_commands.htm).
+
+For more general details on using external Python libraries with Maya, see Autodesk's official guide: [Using external Python libraries with Maya Python](https://help.autodesk.com/view/MAYAUL/
