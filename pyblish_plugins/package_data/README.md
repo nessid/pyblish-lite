@@ -12,3 +12,8 @@ The `pyblish_plugins` directory includes various plugins, each designed to handl
 - **Extractor Plugins**: Responsible for extracting data or information from the working scene.
 - **Collector Plugins**: These plugins collect necessary data or metadata from the scene.
 - **Integrator Plugins**: Used for integrating or exporting the processed data to desired formats or locations.
+
+
+## License
+
+The plugins in this directory are subject to the same license as the Pyblish Lite project. Please refer to the [license file](https://github.com/nessid/pyblish-lite/blob/development/LICENSE) in the main repository for more information.
