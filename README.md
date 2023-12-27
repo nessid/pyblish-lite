@@ -13,6 +13,14 @@ This package is a fork of the [ynput/pyblish-lite](https://github.com/ynput/pybl
 
 Each linked package name leads to a README file with detailed information about specific functionalities, usage instructions, and additional details.
 
+### Pyblish Core Functionality
+
+`pyblish_core` plays a vital role in Pyblish Lite's operation. It handles several key functionalities:
+
+- **Configuration of Logging**: Set up logging for Pyblish Lite to capture and manage log messages.
+- **Filepath Tokens Updater**: Initializes `FilepathTokensUpdater` for managing file path tokens, crucial for working with assets and tasks.
+- **Dynamic Plugin Registration**: Listens for `pyblish_lite_reset` events, and based on the environment variables `PYBLISH_LITE_ASSET_TYPE` and `PYBLISH_LITE_TASK`, it registers plugins relevant to the current context.
+
 ### Purpose of the Fork
 
 The aim of this fork is to provide a robust and flexible publishing framework that is both lightweight and feature-rich. It is designed to address the specific needs of the community and to offer an efficient and customizable publishing solution for various creative production settings.
@@ -70,4 +78,4 @@ Replace `'/path/to/...'` with the actual paths where your Pyblish Lite and its d
 
 For more detailed information on using the `userSetup.py` file in Maya, you can refer to Autodesk's guides on [Initializing the Maya Python environment](https://help.autodesk.com/cloudhelp/2022/ENU/Maya-Scripting/files/GUID-640C1383-3FB8-410F-AE18-987A812B5914.htm) and [Entering Python commands in Maya](https://download.autodesk.com/us/maya/Maya_2014_GettingStarted/files/Using_Python_in_Maya_Entering_Python_commands.htm).
 
-For more general details on using external Python libraries with Maya, see Autodesk's official guide: [Using external Python libraries with Maya Python](https://help.autodesk.com/view/MAYAUL/
+For more general details on using external Python libraries with Maya, see Autodesk's official guide: [Using external Python libraries with Maya Python](https://help.autodesk.com/view/MAYAUL/).
