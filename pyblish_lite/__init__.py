@@ -12,6 +12,7 @@ __all__ = [
     '__version__'
 ]
 
-from .setup_env import setup_env_variables
+from pyblish_setup import setup_env_variables, import_modules
 
 setup_env_variables()
+import_modules()
