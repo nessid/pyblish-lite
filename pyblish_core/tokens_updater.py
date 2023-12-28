@@ -3,7 +3,7 @@
 # from engines_software_manager.software_engine import SoftwareEngine
 # from template_manager_core.templated_path import TemplatedPath
 from pyblish_core import plugins_collection, plugins_registration
-from .lib import configure_logging
+from pyblish_core.lib import configure_logging
 from pyblish.api import (
     deregister_all_paths,
     deregister_all_plugins
@@ -12,7 +12,7 @@ from pyblish.api import (
 log = configure_logging(__name__)
 
 
-class FilepathTokensUpdater:
+class TokensUpdater:
     def __init__(self):
         self.previous_filepath = None  # Stores the last processed file path
         self.previous_tokens = None  # Stores tokens related to the file path

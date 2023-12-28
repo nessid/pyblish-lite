@@ -1,12 +1,11 @@
 import sys
-import logging
 from pathlib import Path
 from PySide2 import QtWidgets
 from .window import PluginsManagerUI
+from pyblish_core.lib import configure_logging
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-log = logging.getLogger(__name__)
+log = configure_logging(__name__)
 
 
 class PluginsManagerApp:

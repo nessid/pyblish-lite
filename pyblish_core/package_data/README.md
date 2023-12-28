@@ -19,9 +19,9 @@
 ### Filepath Tokens Updater
 
 ```python
-from pyblish_core.filepath_tokens_updater import FilepathTokensUpdater
+from pyblish_core.tokens_updater import TokensUpdater
 
-updater = FilepathTokensUpdater()
+updater = TokensUpdater()
 updater.register_plugins_by_task()
 ```
 

@@ -1,13 +1,12 @@
 import os
 import json
-import logging
 from typing import List, Type
 import pyblish.api
 from pyblish_core.plugins_data_generator import PluginsDataGenerator
+from pyblish_core.lib import configure_logging
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-log = logging.getLogger(__name__)
+log = configure_logging(__name__)
 
 
 class PluginsCollect(object):

@@ -46,32 +46,36 @@ Add the following script to your `userSetup.py` to set up Pyblish Lite. This scr
 ```python
 import os
 import sys
+import runpy
 
-# Paths for Pyblish Lite and dependencies
+# Define paths to the Pyblish Lite and its dependencies
+pyblish_base_path = '/path/to/pyblish_base'
 pyblish_lite_path = '/path/to/pyblish_lite'
 pyblish_maya_path = '/path/to/pyblish_maya'
-pyblish_base_path = '/path/to/pyblish_base'
 
-# Adding paths to system path
-sys.path.append(pyblish_lite_path)
+# Add the paths to the system path for Python to recognize these locations
+# This is necessary for importing modules from these paths
 sys.path.extend([
+    pyblish_base_path,
     pyblish_maya_path,
-    os.path.join(pyblish_maya_path, 'pyblish_maya'),
-    os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath'),
-    pyblish_base_path
+    pyblish_lite_path,
 ])
 
-# Import and setup Pyblish modules
+# Attempt to import chosen plugins
 try:
-    import pyblish_lite
-    import pyblish_core
-    import pyblish_plugins_manager
-    import pyblish
-    import pyblish_maya
-    pyblish_maya.setup()
+    import pyblish_plugins.pyblish_plugins_common
+    import pyblish_plugins.pyblish_plugins_maya
+
 except ImportError as e:
+    # In case of import errors, print the traceback
     import traceback
     print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
+
+
+# Import and execute pyblish_setup methods
+from pyblish_setup import initialize_pyblish_lite, run_pyblish_maya_setup
+initialize_pyblish_lite()
+run_pyblish_maya_setup(pyblish_maya_path)
 ```
 
 Replace `'/path/to/...'` with the actual paths where your Pyblish Lite and its dependencies are located.
