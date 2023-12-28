@@ -7,7 +7,7 @@ from PySide2 import QtGui
 from PySide2 import QtWidgets, QtCore
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QSplitter, QHBoxLayout, QVBoxLayout
-from pyblish_core.lib import configure_logging
+from pyblish_core.logging import configure_logging
 
 # Configure logging
 log = configure_logging(__name__)

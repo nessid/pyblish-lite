@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from PySide2 import QtWidgets
 from .window import PluginsManagerUI
-from pyblish_core.lib import configure_logging
+from pyblish_core.logging import configure_logging
 
 # Configure logging
 log = configure_logging(__name__)

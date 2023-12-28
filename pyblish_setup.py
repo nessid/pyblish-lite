@@ -1,5 +1,5 @@
 import os
-from pyblish_core.lib import configure_logging
+from pyblish_core.logging import configure_logging
 
 # Configure logging for this module
 log = configure_logging(__name__)
