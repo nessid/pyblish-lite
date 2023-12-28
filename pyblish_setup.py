@@ -24,6 +24,10 @@ def setup_env_variables():
 
     os.environ['PYBLISH_GUI'] = 'pyblish_lite'
 
+    # Initialize asset_type and task
+    os.environ['PYBLISH_LITE_ASSET_TYPE'] = ''
+    os.environ['PYBLISH_LITE_TASK'] = ''
+
 
 def import_modules():
     # Attempt to import Pyblish modules
