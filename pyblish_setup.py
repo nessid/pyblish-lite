@@ -1,60 +1,68 @@
 import os
 from pyblish_core.lib import configure_logging
-from pyblish_core.env_lib import add_path_to_env_var
+
+# Configure logging for this module
+log = configure_logging(__name__)
 
 
 def setup_env_variables():
+    """
+    Set up environment variables for the Pyblish application.
+    """
+    from pyblish_core.env_lib import add_path_to_env_var
 
-    log = configure_logging(__name__)
+    log.info('Setting up Pyblish Lite environment variables')
 
-    log.info('setup_env_variables')
+    root = os.path.dirname(os.path.realpath(__file__))
 
-    root = os.path.realpath(os.path.join(os.path.dirname(__file__)))
+    # Adding necessary paths to PYTHONPATH
+    for sub_dir in ['pyblish_core', 'pyblish_plugins', 'pyblish_plugins_manager']:
+        add_path_to_env_var('PYTHONPATH', os.path.join(root, sub_dir))
 
-    add_path_to_env_var('PYTHONPATH', os.path.join(root, 'pyblish_core'))
-    add_path_to_env_var('PYTHONPATH', os.path.join(root, 'pyblish_plugins'))
-    add_path_to_env_var('PYTHONPATH', os.path.join(root, 'pyblish_plugins_manager'))
-
-    # Path to the JSON file listing pyblish pyblish_plugins active states by asset_types and tasks.
+    # Setting environment variables for Pyblish configuration
     os.environ['PYBLISH_PLUGINS_SETTINGS_BY_TASKS_JSON'] = os.path.join(root, 'pyblish_plugins_manager', 'config',
                                                                         'pyblish_plugins_settings_by_tasks.json')
-    # Path to the JSON file listing production assets types and their associated tasks
     os.environ['PYBLISH_ASSET_TASKS_MAPPING_JSON'] = os.path.join(root, 'pyblish_plugins_manager', 'config',
                                                                   'asset_tasks_mapping.json')
-
     os.environ['PYBLISH_GUI'] = 'pyblish_lite'
-
-    # Initialize asset_type and task
     os.environ['PYBLISH_LITE_ASSET_TYPE'] = ''
     os.environ['PYBLISH_LITE_TASK'] = ''
 
 
-def import_modules():
-    # Attempt to import Pyblish modules
-    # This is where the actual Pyblish functionality is imported into the script
-    try:
-        # import pyblish_lite
-        import pyblish
-        import pyblish_core
-        import pyblish_plugins_manager
-    except ImportError as e:
-        # In case of import errors, print the traceback
-        # This helps in diagnosing what went wrong during the import process
-        import traceback
-        print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
+def initialize_pyblish_lite():
+    """
+    Initialize Pyblish Lite environment and configurations.
+    """
+    import pyblish.api
+    from pyblish_core.tokens_updater import TokensUpdater
+
+    setup_env_variables()
+
+    # Instantiate TokensUpdater and register callback
+    tokens_updater = TokensUpdater()
+    log.info('Instantiated FilepathTokensUpdater')
+
+    def on_pyblish_lite_reset():
+        """
+        Callback function for Pyblish Lite reset event.
+        """
+        asset_type = os.getenv('PYBLISH_LITE_ASSET_TYPE')
+        task = os.getenv('PYBLISH_LITE_TASK')
+        tokens_updater.register_plugins_by_task(asset_type, task)
+        log.info(f'Pyblish Lite reset: Asset Type: {asset_type}, Task: {task}')
+
+    pyblish.api.register_callback("pyblish_lite_reset", on_pyblish_lite_reset)
 
 
-setup_env_variables()
-import_modules()
+def run_pyblish_maya_setup(pyblish_maya_path: str):
+    """
+    Execute the Pyblish Maya setup script.
 
-
-def run_pyblish_maya_setup(pyblish_maya_path):
+    :param pyblish_maya_path: Path to the Pyblish Maya directory.
+    :type pyblish_maya_path: str
+    """
     import runpy
 
-    # Construct the full path to the userSetup.py file in the Pyblish Maya package
-    # This is done by joining the base path with the relative path to the file
+    log.info('Run Pyblish Maya userSetup.py')
     user_setup_path = os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath', 'userSetup.py')
-
-    # Run the userSetup.py script (to run pyblish_maya.setup() that adds pyblish in the Maya 'File' menu)
-    # This executes the script as if it was a standalone Python script
     runpy.run_path(user_setup_path)
