@@ -44,6 +44,10 @@ def import_modules():
         print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
 
 
+setup_env_variables()
+import_modules()
+
+
 def run_pyblish_maya_setup(pyblish_maya_path):
     import runpy
 
