@@ -1,17 +1,16 @@
 from typing import Dict, Any, Union
 import os
 import json
-import logging
 import pyblish.api
 from pyblish_core.plugins_data_generator import PluginsDataGenerator
 from PySide2 import QtGui
 from PySide2 import QtWidgets, QtCore
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QSplitter, QHBoxLayout, QVBoxLayout
+from pyblish_core.lib import configure_logging
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-log = logging.getLogger(__name__)
+log = configure_logging(__name__)
 
 
 class PluginsManagerUI(QtWidgets.QDialog):
