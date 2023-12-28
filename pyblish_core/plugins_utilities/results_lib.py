@@ -109,7 +109,7 @@ def handle_renaming_action_results(action_instance, successful_renames: List[str
         raise pyblish.api.PyblishError(msg)
 
     if not successful_renames and not failed_renames:
-        # Generate a message for nodes that couldn't be renamed
+        # Generate a message if both lists are empty
         msg = generate_result_message('node(s)', [], 'renamed')
 
         # Log a warning with the message

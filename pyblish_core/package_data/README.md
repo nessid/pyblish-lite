@@ -19,7 +19,7 @@
 ### Filepath Tokens Updater
 
 ```python
-from pyblish_core.tokens_updater import TokensUpdater
+from pyblish_core.plugins_management.tokens_updater import TokensUpdater
 
 updater = TokensUpdater()
 updater.register_plugins_by_task()
@@ -45,8 +45,8 @@ new_string = remove_pattern(input_string, pattern)
 ### Plugin Management
 
 ```python
-from pyblish_core.plugins_collection import PluginsCollect
-from pyblish_core.plugins_registration import PluginsRegister
+from pyblish_core.plugins_management.plugins_collection import PluginsCollect
+from pyblish_core.plugins_management.plugins_registration import PluginsRegister
 
 plugins = PluginsCollect.from_asset_task(asset_type, task)
 register = PluginsRegister(plugins)

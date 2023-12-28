@@ -1,9 +1,7 @@
-from pyblish_core.plugins_collection import PluginsCollect
+from pyblish_core.plugins_management.plugins_collection import PluginsCollect
 from pyblish.api import (
-    register_plugin,
-    deregister_all_paths,
-    deregister_all_plugins
-    )
+    register_plugin
+)
 
 
 class PluginsRegister(object):

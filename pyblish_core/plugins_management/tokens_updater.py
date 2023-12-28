@@ -2,8 +2,8 @@
 # import pyblish.api
 # from engines_software_manager.software_engine import SoftwareEngine
 # from template_manager_core.templated_path import TemplatedPath
-from pyblish_core import plugins_collection, plugins_registration
-from pyblish_core.lib import configure_logging
+from pyblish_core.plugins_management import plugins_collection, plugins_registration
+from pyblish_core.logging import configure_logging
 from pyblish.api import (
     deregister_all_paths,
     deregister_all_plugins

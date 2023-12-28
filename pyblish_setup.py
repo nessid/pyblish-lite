@@ -1,5 +1,5 @@
 import os
-from pyblish_core.lib import configure_logging
+from pyblish_core.logging import configure_logging
 
 # Configure logging for this module
 log = configure_logging(__name__)
@@ -9,7 +9,7 @@ def setup_env_variables():
     """
     Set up environment variables for the Pyblish application.
     """
-    from pyblish_core.env_lib import add_path_to_env_var
+    from pyblish_core.environment_utils import add_path_to_env_var
 
     log.info('Setting up Pyblish Lite environment variables')
 
@@ -34,7 +34,7 @@ def initialize_pyblish_lite():
     Initialize Pyblish Lite environment and configurations.
     """
     import pyblish.api
-    from pyblish_core.tokens_updater import TokensUpdater
+    from pyblish_core.plugins_management.tokens_updater import TokensUpdater
 
     setup_env_variables()
 
