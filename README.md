@@ -66,6 +66,7 @@ try:
     import pyblish_lite
     import pyblish_plugins.pyblish_plugins_common
     import pyblish_plugins.pyblish_plugins_maya
+
 except ImportError as e:
     # In case of import errors, print the traceback
     # This helps in diagnosing what went wrong during the import process
@@ -73,14 +74,9 @@ except ImportError as e:
     print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
 
 
-# Construct the full path to the userSetup.py file in the Pyblish Maya package
-# This is done by joining the base path with the relative path to the file
-user_setup_path = os.path.join(pyblish_maya_path, 'pyblish_maya', 'pythonpath', 'userSetup.py')
-
-# Run the userSetup.py script (to run pyblish_maya.setup() that adds pyblish in the Maya 'File' menu)
-# This executes the script as if it was a standalone Python script
-runpy.run_path(user_setup_path)
-
+# Import and execute the run_pyblish_maya_setup method
+from pyblish_setup import run_pyblish_maya_setup
+run_pyblish_maya_setup(pyblish_maya_path)
 ```
 
 Replace `'/path/to/...'` with the actual paths where your Pyblish Lite and its dependencies are located.
