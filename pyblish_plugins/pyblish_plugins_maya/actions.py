@@ -1,9 +1,9 @@
 import pyblish.api
 import maya.cmds as cmds
 import re
-from pyblish_core.results_lib import generate_result_message
-from pyblish_core.results_lib import handle_item_renaming_result
-from pyblish_core.results_lib import handle_renaming_action_results
+from pyblish_core.plugins_utilities.results_lib import generate_result_message
+from pyblish_core.plugins_utilities.results_lib import handle_item_renaming_result
+from pyblish_core.plugins_utilities.results_lib import handle_renaming_action_results
 
 
 def create_action_subclass(superclass, _items_type: str, _items: list or dict, _on='all'):

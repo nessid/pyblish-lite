@@ -2,9 +2,9 @@ import pyblish.api
 import maya.mel as mel
 import maya.cmds as cmds
 from pyblish_plugins.pyblish_plugins_maya import actions
-from pyblish_core.plugins_results import validation_result
-from pyblish_core.results_lib import generate_result_message
-from pyblish_core.name_lib import define_plugin_label
+from pyblish_core.plugins_utilities.result_by_plugin_type import validation_result
+from pyblish_core.plugins_utilities.results_lib import generate_result_message
+from pyblish_core.plugins_utilities.strings_handling import define_plugin_label
 
 
 class DeleteNonDeformerHistory(pyblish.api.Action):

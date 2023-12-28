@@ -2,7 +2,7 @@ import os
 import json
 from typing import List, Type
 import pyblish.api
-from pyblish_core.plugins_data_generator import PluginsDataGenerator
+from pyblish_core.plugins_management.plugins_data import PluginsDataGenerator
 from pyblish_core.logging import configure_logging
 
 # Configure logging

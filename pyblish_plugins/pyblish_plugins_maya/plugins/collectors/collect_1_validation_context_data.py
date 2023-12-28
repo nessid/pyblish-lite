@@ -1,6 +1,6 @@
 import pyblish.api
-from pyblish_core.plugins_results import collection_result
-from pyblish_core.name_lib import define_plugin_label
+from pyblish_core.plugins_utilities.result_by_plugin_type import collection_result
+from pyblish_core.plugins_utilities.strings_handling import define_plugin_label
 
 
 class ValidationContextCollector(pyblish.api.Collector):

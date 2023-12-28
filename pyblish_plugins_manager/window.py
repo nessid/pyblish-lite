@@ -2,7 +2,7 @@ from typing import Dict, Any, Union
 import os
 import json
 import pyblish.api
-from pyblish_core.plugins_data_generator import PluginsDataGenerator
+from pyblish_core.plugins_management.plugins_data import PluginsDataGenerator
 from PySide2 import QtGui
 from PySide2 import QtWidgets, QtCore
 from PySide2.QtCore import Qt

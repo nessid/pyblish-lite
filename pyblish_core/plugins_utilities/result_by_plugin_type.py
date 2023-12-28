@@ -1,5 +1,5 @@
 import pyblish.api
-from pyblish_core.results_lib import generate_result_message
+from pyblish_core.plugins_utilities.results_lib import generate_result_message
 from typing import Union, List, Dict
 
 
