@@ -57,25 +57,24 @@ pyblish_maya_path = '/path/to/pyblish_maya'
 # This is necessary for importing modules from these paths
 sys.path.extend([
     pyblish_base_path,
+    pyblish_maya_path,
     pyblish_lite_path,
-    pyblish_maya_path
 ])
 
-# Attempt to import Pyblish Lite and chosen plugins
+# Attempt to import chosen plugins
 try:
-    import pyblish_lite
     import pyblish_plugins.pyblish_plugins_common
     import pyblish_plugins.pyblish_plugins_maya
 
 except ImportError as e:
     # In case of import errors, print the traceback
-    # This helps in diagnosing what went wrong during the import process
     import traceback
     print("Pyblish Lite: Could not load integration: %s" % traceback.format_exc())
 
 
-# Import and execute the run_pyblish_maya_setup method
-from pyblish_setup import run_pyblish_maya_setup
+# Import and execute pyblish_setup methods
+from pyblish_setup import initialize_pyblish_lite, run_pyblish_maya_setup
+initialize_pyblish_lite()
 run_pyblish_maya_setup(pyblish_maya_path)
 ```
 
