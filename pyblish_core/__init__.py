@@ -1,7 +1,7 @@
 import os
 import pyblish.api
 from pyblish_core.filepath_tokens_updater import FilepathTokensUpdater
-from .lib import configure_logging
+from pyblish_core.lib import configure_logging
 
 log = configure_logging(__name__)
 
