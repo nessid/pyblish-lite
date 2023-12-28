@@ -12,7 +12,7 @@ from pyblish.api import (
 log = configure_logging(__name__)
 
 
-class FilepathTokensUpdater:
+class TokensUpdater:
     def __init__(self):
         self.previous_filepath = None  # Stores the last processed file path
         self.previous_tokens = None  # Stores tokens related to the file path
