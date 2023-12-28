@@ -40,7 +40,7 @@ def initialize_pyblish_lite():
 
     # Instantiate TokensUpdater and register callback
     tokens_updater = TokensUpdater()
-    log.info('Instantiated FilepathTokensUpdater')
+    log.info('Instantiated TokensUpdater')
 
     def on_pyblish_lite_reset():
         """
